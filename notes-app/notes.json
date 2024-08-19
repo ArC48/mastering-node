@@ -1,1 +1,6 @@
-[{"title":"bed","body":"make bed"},{"title":"eat","body":"eat meat"}]
+[
+    { "title": "bed", "body": "make bed" },
+    { "title": "eat", "body": "eat meat" },
+    { "title": "get document", "body": "" },
+    { "title": "get coffee", "body": "" }
+]
