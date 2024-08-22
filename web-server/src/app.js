@@ -29,6 +29,7 @@ app.get("", (req, res) => {
 app.get("/about", (req, res) => {
     res.render("about", {
         title: "about page",
+        name: "Beqa",
     });
 });
 
@@ -36,6 +37,7 @@ app.get("/help", (req, res) => {
     res.render("help", {
         title: "Get Help!",
         buttonText: "Send Feedback",
+        name: "Beqa",
     });
 });
 
@@ -50,6 +52,20 @@ app.get("/weather", (req, res) => {
             location: "Alaska",
         },
     ]);
+});
+
+app.get("/help/*", (req, res) => {
+    res.render("404", {
+        title: "Help article not Found",
+        name: "Beqa",
+    });
+});
+
+app.get("*", (req, res) => {
+    res.render("404", {
+        title: "Page not Found",
+        name: "Beqa",
+    });
 });
 
 app.listen(3000, () => {
