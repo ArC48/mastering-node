@@ -1,4 +1,4 @@
-/* CSS: about.css */
+/* CSS: styles.css */
 
 /* General reset */
 * {
@@ -13,6 +13,7 @@
 body {
     background-color: #f4f4f4;
     color: #333;
+    text-align: center;
 }
 
 /* Header styling */
@@ -20,12 +21,11 @@ header {
     background-color: #4caf50;
     color: #fff;
     padding: 20px 0;
-    text-align: center;
 }
 
 /* Content area styling */
 .content {
-    max-width: 800px;
+    max-width: 600px;
     margin: 40px auto;
     padding: 20px;
     background-color: #fff;
@@ -36,18 +36,31 @@ header {
 /* Heading styling */
 .content h2 {
     color: #4caf50;
-    font-size: 28px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #4caf50;
-    padding-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 /* Paragraph styling */
 .content p {
     font-size: 18px;
-    margin-bottom: 20px;
-    line-height: 1.8;
     color: #555;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
 
 /* Footer styling */
@@ -55,8 +68,8 @@ footer {
     background-color: #333;
     color: #fff;
     padding: 15px 0;
-    text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
+    text-align: center;
 }
