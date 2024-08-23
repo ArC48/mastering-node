@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
 
 const app = express();
 
@@ -42,24 +44,52 @@ app.get("/help", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-    res.send([
-        {
-            forecast: "23 degrees celsius",
-            location: "Georgia",
-        },
-        {
-            forecast: "2 degrees celsius",
-            location: "Alaska",
-        },
-    ]);
-});
+    if (!req.query.address) {
+        return res.send({
+            error: "You must provide an address term",
+        });
+    }
 
-app.get("/help/*", (req, res) => {
-    res.render("404", {
-        title: "Help article not Found",
-        name: "Beqa",
+    geocode(req.query.address, (error, { latitude, longitude, address }) => {
+        if (error) {
+            return res.send({
+                error,
+            });
+        }
+        forecast(latitude, longitude, "m", (error, forecastData) => {
+            if (error) {
+                return res.send({
+                    error,
+                });
+            }
+            console.log(forecastData);
+
+            res.send({
+                forecast: forecastData,
+                location: req.query.address,
+            });
+        });
     });
 });
+
+app.get("/products", (req, res) => {
+    if (!req.query.search) {
+        return res.send({
+            error: "You must provide a search term",
+        });
+    }
+
+    res.send({
+        products: [],
+    });
+});
+
+// app.get("/help/*", (req, res) => {
+//     res.render("404", {
+//         title: "Help article not Found",
+//         name: "Beqa",
+//     });
+// });
 
 app.get("*", (req, res) => {
     res.render("404", {
