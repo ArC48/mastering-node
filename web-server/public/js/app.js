@@ -12,9 +12,10 @@ const capitalize = (str) => {
 weatherForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    messageOne.textContent = `Loading...`;
+    weatherPic.style.display = "block";
+    weatherPic.src = "../assets/loading.gif";
+    messageOne.textContent = ``;
     messageTwo.textContent = "";
-    weatherPic.src = "";
 
     fetch(`http://localhost:3000/weather?address=${searchElement.value}`).then(
         (response) => {
@@ -28,6 +29,7 @@ weatherForm.addEventListener("submit", (e) => {
                     } in ${capitalize(data.location)}`;
                     messageTwo.textContent = `${data.forecast.temperature}°C`;
                 }
+                weatherPic.style.display = "none";
             });
         }
     );

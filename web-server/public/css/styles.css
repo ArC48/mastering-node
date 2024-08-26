@@ -48,3 +48,10 @@ footer {
     width: 100%;
     text-align: center;
 }
+
+#weather-pic {
+    display: none;
+    height: 100px;
+    position: absolute;
+    left: 40vw;
+}
