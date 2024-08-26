@@ -4,13 +4,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Welcome Page</title>
         <link rel="stylesheet" href="css/styles.css" />
-        <script src="js/app.js"></script>
+        <script src="js/app.js" defer></script>
     </head>
     <body>
         {{>header}}
 
-        <img src="./assets/water.jpg" alt="" srcset="" />
-        <p>Created by {{name}} </p>
+        <form>
+            <input type="text" placeholder="Location">
+            <button>Search</button>
+        </form>
+
+        <p id="message-1"></p>
+        <p id="message-2"></p>
+        <img id="weather-pic" src="" alt="">
+
         {{>footer}}
     </body>
 </html>
