@@ -8,7 +8,6 @@ const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-// messageOne.textContent = "dsa";
 weatherForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
