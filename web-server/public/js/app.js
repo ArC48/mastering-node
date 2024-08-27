@@ -33,7 +33,7 @@ weatherForm.addEventListener("submit", (e) => {
         })
         .catch((err) => {
             messageOne.textContent = "There might be a server problem";
-            messageTwo.textContent = "sorry :(";
+            messageTwo.textContent = "Sorry :(";
             weatherPic.style.display = "none";
         });
 });
