@@ -16,6 +16,43 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
 
     const db = client.db(databaseName);
 
+    // add objects into the database
+    // db.collection("users").insertOne(
+    //     {
+    //         name: "Luka",
+    //         age: 24,
+    //     },
+    //     (err, document) => {
+    //         if (err) {
+    //             return console.log("Unable to add a user to the database :(");
+    //         }
+    //         console.log(document.insertedId);
+    //     }
+    // );
+
+    // add multiple objects into the database
+    // db.collection("tasks").insertMany(
+    //     [
+    //         {
+    //             name: "get some grocceries!",
+    //             description: "bread, chicken, beer",
+    //             done: false,
+    //         },
+    //         {
+    //             name: "practice coding!",
+    //             description: "",
+    //             done: true,
+    //         },
+    //     ],
+    //     (err, result) => {
+    //         if (err) {
+    //             return console.log("Unable to add tasks :(");
+    //         }
+
+    //         console.log(result.insertedIds);
+    //     }
+    // );
+
     // db.collection("users").findOne(
     //     { _id: new ObjectId("66cdce6a507d56a524d7dbc8") },
     //     (err, user) => {
@@ -40,15 +77,15 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
     //         console.log(count);
     //     });
 
-    db.collection("tasks").findOne(
-        {
-            _id: new ObjectId("66cdc6d571255bea5fe45dce"),
-        },
-        (err, task) => {
-            if (err) {
-                return console.log("Unable to get the task :(");
-            }
-            console.log(task);
-        }
-    );
+    // db.collection("tasks").findOne(
+    //     {
+    //         _id: new ObjectId("66cdc6d571255bea5fe45dce"),
+    //     },
+    //     (err, task) => {
+    //         if (err) {
+    //             return console.log("Unable to get the task :(");
+    //         }
+    //         console.log(task);
+    //     }
+    // );
 });
