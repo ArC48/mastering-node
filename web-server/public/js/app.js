@@ -13,11 +13,11 @@ weatherForm.addEventListener("submit", (e) => {
 
     weatherPic.style.display = "block";
     weatherPic.src = "../assets/loading.gif";
-    messageOne.textContent = ``;
+    messageOne.textContent = "";
     messageTwo.textContent = "";
 
-    fetch(`http://localhost:3000/weather?address=${searchElement.value}`).then(
-        (response) => {
+    fetch(`http://localhost:3000/weather?address=${searchElement.value}`)
+        .then((response) => {
             response.json().then((data) => {
                 if (data.error) {
                     messageOne.textContent = data.error;
@@ -30,6 +30,10 @@ weatherForm.addEventListener("submit", (e) => {
                 }
                 weatherPic.style.display = "none";
             });
-        }
-    );
+        })
+        .catch((err) => {
+            messageOne.textContent = "There might be a server problem";
+            messageTwo.textContent = "sorry :(";
+            weatherPic.style.display = "none";
+        });
 });
