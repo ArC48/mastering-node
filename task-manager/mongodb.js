@@ -5,8 +5,8 @@ const { MongoClient, ObjectId } = require("mongodb");
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "task-manager";
 
-const id = new ObjectId();
-console.log(id.toHexString());
+// const id = new ObjectId();
+// console.log(id.toHexString());
 
 // connect node to database
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
@@ -16,67 +16,39 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
 
     const db = client.db(databaseName);
 
-    // insert a single object
-
-    // db.collection("users").insertOne(
-    //     {
-    //         _id: id,
-    //         name: "Dracula",
-    //         age: 250,
-    //     },
-    //     (err, result) => {
+    // db.collection("users").findOne(
+    //     { _id: new ObjectId("66cdce6a507d56a524d7dbc8") },
+    //     (err, user) => {
     //         if (err) {
-    //             return console.log("Unable to insert user :(");
+    //             return console.log("Unable to fetch :(");
     //         }
-
-    //         console.log(result.insertedId);
+    //         console.log(user);
     //     }
     // );
 
-    // insert multiple objects
+    // get the array of objects => toArray()
+    // db.collection("tasks")
+    //     .find({})
+    //     .toArray((err, tasks) => {
+    //         console.log(tasks);
+    //     });
 
-    // db.collection("users").insertMany(
-    //     [
-    //         {
-    //             name: "Jay",
-    //             age: 25,
-    //         },
-    //         {
-    //             name: "Luka",
-    //             age: 24,
-    //         },
-    //     ],
-    //     (err, result) => {
-    //         if (err) {
-    //             return console.log("Unable to insert documents :(");
-    //         }
+    //  get the number of objects in a database => count()
+    // db.collection("tasks")
+    //     .find({})
+    //     .count((err, count) => {
+    //         console.log(count);
+    //     });
 
-    //         console.log(result.insertedIds);
-    //     }
-    // );
-
-    // db.collection("tasks").insertMany(
-    //     [
-    //         {
-    //             _id: 123,
-    //             description: "Fuck some bitches",
-    //             completed: false,
-    //         },
-    //         {
-    //             description: "Watch the movie",
-    //             completed: true,
-    //         },
-    //         {
-    //             description: "make your bed",
-    //             completed: false,
-    //         },
-    //     ],
-    //     (err, result) => {
-    //         if (err) {
-    //             return console.log("Could'nt insert the data :(");
-    //         }
-
-    //         console.log(result.insertedCount);
-    //     }
-    // );
+    db.collection("tasks").findOne(
+        {
+            _id: new ObjectId("66cdc6d571255bea5fe45dce"),
+        },
+        (err, task) => {
+            if (err) {
+                return console.log("Unable to get the task :(");
+            }
+            console.log(task);
+        }
+    );
 });
