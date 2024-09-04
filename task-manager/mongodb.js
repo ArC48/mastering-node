@@ -16,6 +16,24 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
 
     const db = client.db(databaseName);
 
+    // db.collection("users")
+    //     .findOneAndUpdate(
+    //         {
+    //             _id: new ObjectId("66d802e15a17014a806f36a8"),
+    //         },
+    //         {
+    //             $inc: {
+    //                 age: 1,
+    //             },
+    //         }
+    //     )
+    //     .then((result) => {
+    //         console.log(result);
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+
     // db.collection("users").findOne(
     //     { _id: new ObjectId("66cdce6a507d56a524d7dbc8") },
     //     (err, user) => {
@@ -40,15 +58,37 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
     //         console.log(count);
     //     });
 
-    db.collection("tasks").findOne(
-        {
-            _id: new ObjectId("66cdc6d571255bea5fe45dce"),
-        },
-        (err, task) => {
-            if (err) {
-                return console.log("Unable to get the task :(");
-            }
-            console.log(task);
-        }
-    );
+    // db.collection("tasks").findOne(
+    //     {
+    //         _id: new ObjectId("66cdc6d571255bea5fe45dce"),
+    //     },
+    //     (err, task) => {
+    //         if (err) {
+    //             return console.log("Unable to get the task :(");
+    //         }
+    //         console.log(task);
+    //     }
+    // );
+
+    db.collection("tasks")
+        .deleteMany({
+            completed: false,
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+    db.collection("tasks")
+        .deleteOne({
+            description: "Fuck some bitches",
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
