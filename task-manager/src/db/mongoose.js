@@ -22,6 +22,17 @@ const User = mongoose.model("User", {
             }
         },
     },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+        minLength: 7,
+        validate(value) {
+            if (value.toLowerCase().includes("password")) {
+                throw new Error("password is too weak!");
+            }
+        },
+    },
     age: {
         type: Number,
         required: true,
@@ -38,41 +49,46 @@ const User = mongoose.model("User", {
     },
 });
 
-const user1 = new User({
-    name: "lasha",
-    // age: 26,
-    sex: "Male",
-    email: "LAsha98@eMail.com",
-});
-
-user1
-    .save()
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-// const Task = mongoose.model("Task", {
-//     title: {
-//         type: String,
-//     },
-//     completed: {
-//         type: Boolean,
-//     },
+// const user1 = new User({
+//     name: "James",
+//     email: "james112@eMail.com",
+//     password: "jamesPass123",
+//     age: 26,
+//     sex: "Male",
 // });
 
-// const task1 = new Task({
-//     title: "learn mongoose",
-//     completed: false,
-// });
-
-// task1
+// user1
 //     .save()
-//     .then((result) => {
-//         console.log(result);
+//     .then((res) => {
+//         console.log(res);
 //     })
 //     .catch((err) => {
 //         console.log(err);
 //     });
+
+const Task = mongoose.model("Task", {
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    completed: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+});
+
+const task1 = new Task({
+    title: "     learn shmode.js     ",
+    completed: true,
+});
+
+task1
+    .save()
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
