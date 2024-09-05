@@ -1,17 +1,19 @@
 {
-  "name": "task-manager",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "mongodb": "^4.17.2",
-    "mongodb-legacy": "^6.1.1",
-    "mongoose": "^8.6.1"
-  }
+    "name": "task-manager",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.19.2",
+        "mongodb": "^4.17.2",
+        "mongodb-legacy": "^6.1.1",
+        "mongoose": "^8.6.1"
+    }
 }
