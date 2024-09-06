@@ -30,6 +30,31 @@ app.post("/users", (req, res) => {
         });
 });
 
+app.get("/users", (req, res) => {
+    User.find({})
+        .then((users) => {
+            res.send(users);
+        })
+        .catch((e) => {
+            res.status(500).send(e);
+        });
+});
+
+app.get("/users/:id", (req, res) => {
+    _id = req.params.id;
+
+    User.findById(_id)
+        .then((user) => {
+            if (!user) {
+                return res.status(404).send({ error: "User Not Found!" });
+            }
+            res.send(user);
+        })
+        .catch((e) => {
+            res.status(500).send(e);
+        });
+});
+
 // POST request handler for creating new tasks
 app.post("/tasks", (req, res) => {
     const task = new Task(req.body);
