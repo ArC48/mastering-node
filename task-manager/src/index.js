@@ -55,6 +55,31 @@ app.get("/users/:id", (req, res) => {
         });
 });
 
+app.get("/tasks", (req, res) => {
+    Task.find({})
+        .then((tasks) => {
+            res.send(tasks);
+        })
+        .catch((e) => {
+            res.status(500).send(e);
+        });
+});
+
+app.get("/tasks/:id", (req, res) => {
+    _id = req.params.id;
+
+    Task.findById(_id)
+        .then((task) => {
+            if (!task) {
+                return res.status(404).send({ error: "task not found!" });
+            }
+            res.send(task);
+        })
+        .catch((e) => {
+            res.status(500).send(e);
+        });
+});
+
 // POST request handler for creating new tasks
 app.post("/tasks", (req, res) => {
     const task = new Task(req.body);
