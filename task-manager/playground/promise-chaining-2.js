@@ -7,4 +7,7 @@ Task.findByIdAndDelete("66d9671a1a43bbc7d9056070")
     })
     .then((countOfIncomplete) => {
         console.log(countOfIncomplete + " tasks are left to be done!");
+    })
+    .catch((e) => {
+        console.log(e);
     });
