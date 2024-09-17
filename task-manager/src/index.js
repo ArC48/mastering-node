@@ -112,6 +112,34 @@ app.post("/tasks", async (req, res) => {
     }
 });
 
+app.patch("./tasks/:id", async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ["title", "completed"];
+    const allowedOperation = updates.every((update) => {
+        return allowedUpdates.includes(update);
+    });
+
+    if (!allowedOperation) {
+        return res.status(400).send({ Error: "Invalid keys to change!" });
+    }
+
+    try {
+        _id = req.params.id;
+        const updatedTask = await Task.findByIdAndUpdate(_id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        if (!updatedTask) {
+            return res.status(404).send({ "Error:": "Can't find a task!" });
+        }
+
+        res.send(updatedTask);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
 // Start the server and listen on the specified port
 app.listen(port, () => {
     console.log("Listening on Port: " + port);
