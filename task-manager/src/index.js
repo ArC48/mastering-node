@@ -16,18 +16,6 @@ const port = process.env.PORT || 3000;
 // Middleware to parse incoming JSON requests into JavaScript objects
 app.use(express.json());
 
-// POST request handler for creating new users
-app.post("/users", async (req, res) => {
-    // Create a new user using the data from the request body
-    const user = new User(req.body);
-    try {
-        await user.save();
-        res.status(201).send(`${user.name} added!`);
-    } catch (e) {
-        res.status(400).send(e);
-    }
-});
-
 app.get("/users", async (req, res) => {
     try {
         const users = await User.find({});
@@ -47,6 +35,17 @@ app.get("/users/:id", async (req, res) => {
         res.send(user);
     } catch (e) {
         res.status(500).send(e);
+    }
+});
+
+app.post("/users", async (req, res) => {
+    // Create a new user using the data from the request body
+    const user = new User(req.body);
+    try {
+        await user.save();
+        res.status(201).send(`${user.name} added!`);
+    } catch (e) {
+        res.status(400).send(e);
     }
 });
 
@@ -75,6 +74,19 @@ app.patch("/users/:id", async (req, res) => {
         res.send(user);
     } catch (e) {
         res.status(400).send(e);
+    }
+});
+
+app.delete("/users/:id", async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const deletedUser = await User.findByIdAndDelete(_id);
+        if (!deletedUser) {
+            return res.status(404).send({ Error: "User not found" });
+        }
+        res.send(deletedUser);
+    } catch (e) {
+        res.status(500).send(e);
     }
 });
 
@@ -112,7 +124,7 @@ app.post("/tasks", async (req, res) => {
     }
 });
 
-app.patch("./tasks/:id", async (req, res) => {
+app.patch("/tasks/:id", async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ["title", "completed"];
     const allowedOperation = updates.every((update) => {
@@ -135,6 +147,19 @@ app.patch("./tasks/:id", async (req, res) => {
         }
 
         res.send(updatedTask);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+app.delete("/tasks/:id", async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const deletedTask = await Task.findByIdAndDelete(_id);
+        if (!deletedTask) {
+            return res.status(404).send({ Error: "Task not found" });
+        }
+        res.send(deletedTask);
     } catch (e) {
         res.status(500).send(e);
     }
